@@ -10,16 +10,16 @@
 #include "ship.h"
 #include <stdlib.h>
 #include <stdio.h>
+typedef struct Location{
+		int row;
+		int col;
+	}Location;
 
 class Board {
 public:
 	Board();
 	virtual ~Board();
 
-	typedef struct Location{
-		int row;
-		int col;
-	}Location;
 
 
 	void initBoard(bool manual);
@@ -35,7 +35,7 @@ public:
 	void printMoveToFile(FILE* fp, Location* loc);
 	void printBoard(bool showShips);
 private:
-	char* board[8][8];
+	char board[8][8];
 	bool showShips;
 	Ship* battle;
 	Ship* destroy;
