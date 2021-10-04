@@ -53,8 +53,6 @@ bool checkMove(Location* loc)
 	{
 		return ok;
 	}
-}
-
 	return ok;
 }
 

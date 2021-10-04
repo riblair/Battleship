@@ -8,10 +8,10 @@
 #include "Ship.h"
 
 Ship::Ship() {
-	int size;
-	char name;
-	Location* pos[];
-	bool *hits[];
+//	int size;
+//	char name;
+//	Location* pos[];
+//	bool *hits[];
 
 
 }

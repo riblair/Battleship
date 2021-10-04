@@ -7,13 +7,15 @@
 
 #ifndef BOARD_H_
 #define BOARD_H_
-#include "ship.h"
+#include "Ship.h"
 #include <stdlib.h>
 #include <stdio.h>
-typedef struct Location{
-		int row;
-		int col;
-	}Location;
+
+typedef struct Location
+{
+	int row;
+	int col;
+}Location;
 
 class Board {
 public:

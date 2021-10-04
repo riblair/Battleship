@@ -7,7 +7,8 @@
 
 #ifndef SHIP_H_
 #define SHIP_H_
-#include "board.h"
+#include "Board.h"
+
 class Ship {
 public:
 	Ship();
