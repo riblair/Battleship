@@ -10,11 +10,15 @@
 #include "ship.h"
 #include <stdlib.h>
 #include <stdio.h>
-
 typedef struct Location{
 		int row;
 		int col;
 	}Location;
+
+class Board {
+public:
+	Board();
+	virtual ~Board();
 
 class Board {
 public:

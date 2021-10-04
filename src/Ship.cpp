@@ -8,7 +8,11 @@
 #include "Ship.h"
 
 Ship::Ship() {
-	// TODO Auto-generated constructor stub
+	int size;
+	char name;
+	Location* pos[];
+	bool *hits[];
+
 
 }
 
@@ -16,3 +20,20 @@ Ship::~Ship() {
 	// TODO Auto-generated destructor stub
 }
 
+bool isSunk(){
+
+	bool sunk = false;
+
+	if(true){
+
+	}
+
+	return sunk;
+
+}
+
+void updateHits(Location* loc){
+
+
+
+}

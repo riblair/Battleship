@@ -12,6 +12,9 @@ class Ship {
 public:
 	Ship();
 	virtual ~Ship();
+
+	bool isSunk();
+	void updateHits(Location* loc);
 };
 
 #endif /* SHIP_H_ */
