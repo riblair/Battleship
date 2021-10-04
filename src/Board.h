@@ -19,11 +19,6 @@ class Board {
 public:
 	Board();
 	virtual ~Board();
-
-class Board {
-public:
-	Board();
-	virtual ~Board();
 	void initBoard(bool manual);
 
 	void manuallyPlaceShips();
