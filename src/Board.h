@@ -11,11 +11,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct Location
-{
-	int row;
-	int col;
-}Location;
+//typedef struct Location
+//{
+//	int row;
+//	int col;
+//}Location;
 
 class Board {
 public:
@@ -35,7 +35,6 @@ public:
 	void printBoard(bool showShips);
 private:
 	char board[8][8];
-	bool showShips;
 	Ship* battle;
 	Ship* destroy;
 	Ship* care;
