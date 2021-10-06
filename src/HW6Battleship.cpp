@@ -18,12 +18,16 @@
  ==============================================================================*/
 
 #include "battleship.h"
+#include "Production.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <fstream>
 
-int main (void)
+int main (int argc, char* argv[])
 {
+	Production* pP = new Production();
+	pP->prod(argc, argv);
+
 	/**
 	 * Two boards exist within the game. Hint: each board should be
 	 * implemented as a 2-dimensional array. Each 2-dimensional array

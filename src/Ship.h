@@ -18,15 +18,17 @@ typedef struct Location
 class Ship {
 public:
 	Ship();
+	Ship(int size, char name);
 	virtual ~Ship();
 	bool isSunk();
 	void updateHits(Location* loc);
-	void updateShip(int size,char name,Location** pos, bool* hits);
+	void updateShipLoc(Location* pos);
+	int getSize();
 private:
 	int size;
 	char name;
 	Location* pos;
-	bool* hits[];
+	bool* hits;
 };
 
 #endif /* SHIP_H_ */
