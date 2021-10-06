@@ -259,12 +259,73 @@ Board::~Board() {
 	// TODO Auto-generated destructor stub
 }
 
-void makePlayerMove()
+void Board::makePlayerMove()
 {
+	bool okMove = false;
+	int row = -1;
+	int col = -1;
+	Location* loc = new Location();
 
+	while(!okMove)
+	{
+		this->printBoard(false);
+		puts("Enter a row number for hit (0-7)");
+		fflush(stdout);
+		scanf("%d",&row);
+		puts("Enter a column number for hit (0-7)");
+		fflush(stdout);
+		scanf("%d",&col);
+		loc->row = row;
+		loc->col = col;
+		okMove = this->checkMove(loc);
+		if(!okMove)
+		{
+			puts("Move was invalid! Try Again Please");
+			fflush(stdout);
+		}
+	}
+	switch(board[row][col])
+	{
+	case 'a':
+		puts("Hit!");
+		fflush(stdout);
+		care->updateHits(loc);
+		board[row][col] = 'X';
+		break;
+	case 'b':
+		puts("Hit!");
+		fflush(stdout);
+		battle->updateHits(loc);
+		board[row][col] = 'X';
+		break;
+	case 'd':
+		puts("Hit!");
+		fflush(stdout);
+		destroy->updateHits(loc);
+		board[row][col] = 'X';
+		break;
+	case 's':
+		puts("Hit!");
+		fflush(stdout);
+		sub->updateHits(loc);
+		board[row][col] = 'X';
+		break;
+	case 'r':
+		puts("Hit!");
+		fflush(stdout);
+		cruise->updateHits(loc);
+		board[row][col] = 'X';
+		break;
+	default:
+		puts("Miss!");
+		fflush(stdout);
+		board[row][col] = 'M';
+		break;
+	}
+	this->printBoard(false);
 }
 
-bool checkMove(Location* loc)
+bool Board::checkMove(Location* loc)
 {
 
 	bool ok = false;
@@ -272,10 +333,78 @@ bool checkMove(Location* loc)
 	{
 		return ok;
 	}
+	int col = loc->col;
+	int row = loc->row;
+	if(board[row][col] == '~')
+	{
+		return true;
+	}
+	else if(board[row][col] == 'a' || board[row][col] == 'b' || board[row][col] == 'd' || board[row][col] == 's' || board[row][col] == 'r')
+	{
+		return true;
+	}
+	else if(board[row][col] == 'X' || board[row][col] == 'M')
+	{
+		return ok;
+	}
 	return ok;
 }
 
-void makeRandomMove()
+void Board::makeRandomMove()
 {
 
+	bool okMove = false;
+	int row = rand() % 8;
+	int col = rand() % 8;
+	Location* loc = new Location();
+	this->printBoard(false);
+	puts("Taking Random Move...");
+	fflush(stdout);
+	while(!okMove)
+	{
+		row = rand() % 8;
+		col = rand() % 8;
+		loc->row = row;
+		loc->col = col;
+		okMove = this->checkMove(loc);
+	}
+	switch(board[row][col])
+	{
+	case 'a':
+		puts("Hit!");
+		fflush(stdout);
+		care->updateHits(loc);
+		board[row][col] = 'X';
+		break;
+	case 'b':
+		puts("Hit!");
+		fflush(stdout);
+		battle->updateHits(loc);
+		board[row][col] = 'X';
+		break;
+	case 'd':
+		puts("Hit!");
+		fflush(stdout);
+		destroy->updateHits(loc);
+		board[row][col] = 'X';
+		break;
+	case 's':
+		puts("Hit!");
+		fflush(stdout);
+		sub->updateHits(loc);
+		board[row][col] = 'X';
+		break;
+	case 'r':
+		puts("Hit!");
+		fflush(stdout);
+		cruise->updateHits(loc);
+		board[row][col] = 'X';
+		break;
+	default:
+		puts("Miss!");
+		fflush(stdout);
+		board[row][col] = 'M';
+		break;
+	}
+	this->printBoard(false);
 }
