@@ -36,8 +36,6 @@ bool Production::prod(int argc, char* argv[])
 
 		switch (option) {
 			case 1:
-				puts("case 1");
-				fflush(stdout);
 				board1->initBoard(true);
 		            break;
 			case 2:

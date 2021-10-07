@@ -6,6 +6,7 @@
  */
 
 #include "Ship.h"
+#include <stdlib.h>
 
 Ship::Ship() {
 
@@ -14,12 +15,14 @@ Ship::Ship() {
 Ship::Ship(int size, char name) {
 	this->size = size;
 	this->name = name;
-	Location* positions[size];
-	pos = *(positions);
+	Location** positions = (Location**)malloc(size*sizeof(Location*));
+
 	bool hitsArray[size];
 	for(int i = 0; i < size; i++) {
+		positions[i] = (Location*)malloc(sizeof(Location));
 		*(hitsArray+i) = false;
 	}
+	pos = positions;
 	hits = hitsArray;
 }
 
@@ -43,7 +46,7 @@ void Ship::updateHits(Location* loc) {
 
 	return;
 }
-void Ship::updateShipLoc(Location* pos) {
+void Ship::updateShipLoc(Location** pos) {
 	this->pos = pos;
 	return;
 }
@@ -51,3 +54,12 @@ void Ship::updateShipLoc(Location* pos) {
 int Ship::getSize() {
 	return size;
 }
+
+Location** Ship::getLocation() {
+	return pos;
+}
+
+char Ship::getName() {
+	return name;
+}
+

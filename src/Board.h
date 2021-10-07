@@ -25,7 +25,8 @@ public:
 
 	void manuallyPlaceShips();
 	void randomlyPlaceShips();
-	bool checkShip(Ship* ship, Location* loc, int dir);
+	bool checkShip(Ship* ship, Location** loc, int dir);
+	void placeAllShips();
 
 	void makePlayerMove();
 	bool checkMove(Location* loc);
@@ -40,6 +41,7 @@ private:
 	Ship* care;
 	Ship* cruise;
 	Ship* sub;
+	Ship* ships[5];
 	int hits;
 };
 

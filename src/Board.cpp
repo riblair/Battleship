@@ -27,6 +27,11 @@ Board::Board() {
 	destroy = new Ship(3,'d');
 	sub = new Ship(3,'s');
 	cruise = new Ship(2,'r');
+	*ships = care;
+	*(ships+1) = battle;
+	*(ships+2) = destroy;
+	*(ships+3) = sub;
+	*(ships+4) = cruise;
 
 }
 
@@ -61,13 +66,6 @@ void Board::manuallyPlaceShips() {
 	puts("3 - ship will start at the coordinante you chose, and end to the left of the coordinate you chose");
 	fflush(stdout);
 
-	Ship* ships[5];
-	*ships = care;
-	*(ships+1) = battle;
-	*(ships+2) = destroy;
-	*(ships+3) = sub;
-	*(ships+4) = cruise;
-
 	for(int i = 0; i < 5; i++) {
 
 		switch(i)
@@ -95,7 +93,11 @@ void Board::manuallyPlaceShips() {
 		}
 		puts("boop");
 		fflush(stdout);
-		Location* shipLoc = new Location(); // I could do shipLoc[*(*(ships+i))->getSize()] if shits not working
+		Ship* shippy = *(ships+i);
+		int size = shippy->getSize();
+		Location** locations = (Location**)malloc(size*sizeof(Location*));
+		Location* shipLoc = (Location*)malloc(sizeof(Location)); // I could do shipLoc[*(*(ships+i))->getSize()] if shits not working
+		*(locations) = shipLoc;
 		shipLoc->row = -1;
 		shipLoc->col = -1;
 		int row = -1;
@@ -114,7 +116,7 @@ void Board::manuallyPlaceShips() {
 			scanf("%d",&dir);
 			shipLoc->row = row;
 			shipLoc->col = col;
-			if(checkShip(*(ships+i),shipLoc,dir)) {
+			if(checkShip(*(ships+i),locations,dir)) {
 				puts("Ship is placed!");
 				fflush(stdout);
 				correct = true;
@@ -124,12 +126,46 @@ void Board::manuallyPlaceShips() {
 				fflush(stdout);
 			}
 		} while(!correct);
-
 	}
+	placeAllShips();
 }
 
 void Board::randomlyPlaceShips() {
 
+	for(int i = 0; i < 5; i++) {
+		Ship* shippy = *(ships+i);
+		int size = shippy->getSize();
+		Location** locations = (Location**)malloc(size*sizeof(Location*));
+		Location* shipLoc = (Location*)malloc(sizeof(Location));
+		*(locations) = shipLoc;
+		shipLoc->row = -1;
+		shipLoc->col = -1;
+		int row = -1;
+		int col = -1;
+		int dir = -1;
+		bool correct = false;
+		do {
+			printf("trying to put ship # %d on the board \n", i);
+			fflush(stdout);
+			row = rand() % 8;
+			col = rand() % 8;
+			dir = rand() % 4;
+			shipLoc->row = row;
+			shipLoc->col = col;
+			printf("ship is trying to be placed at (%d,%d) with direction %d \n",row,col,dir);
+			fflush(stdout);
+			if(checkShip(*(ships+i), locations, dir)) {
+				correct = true;
+				puts("ship is in valid location");
+			}
+			else {
+				correct = false;
+			}
+		} while(!correct);
+		puts("yay!");
+		fflush(stdout);
+	}
+	placeAllShips();
 	//	care = new Ship();
 	//	Location* cl[5];
 	//	Location* newLoc;
@@ -146,37 +182,33 @@ void Board::randomlyPlaceShips() {
 	//	care->updateShip(5, 'a', cl, hits);
 }
 
-bool Board::checkShip(Ship* ship, Location* loc, int dir) {
+bool Board::checkShip(Ship* ship, Location** loc, int dir) {
 	int size = ship->getSize();
-	if(loc == NULL) {
-		puts("Location was null");
-		fflush(stdout);
-		return false;
-	}
-	if(dir == NULL || dir < 0) {
+	Location* anchor = *(loc);
+	if(dir < 0) {
 		puts("Either dir was null, or dir was less than 0");
 		fflush(stdout);
 		return false;
 	}
-	if(loc->col > 7 || loc->col < 0 || loc->row > 7 || loc->row < 0) {
+	if(anchor->col > 7 || anchor->col < 0 || anchor->row > 7 || anchor->row < 0) {
 		puts("location suggested was out of bounds");
 		fflush(stdout);
 		return false;
 	}
 	//straight up
 	if(dir == 0) {
-		if(loc->row-size < 0) {
+		if(anchor->row-size < 0) {
 			puts("Direction led ship out of bounds");
 			fflush(stdout);
 			return false;
 		}
 		for(int i = 0; i < size; i++) {
-			Location pos1;
-			pos1.row = loc->row-i;
-			pos1.col = loc->col;
+			Location* pos1 = (Location*)malloc(sizeof(Location));
+			pos1->row = anchor->row-i;
+			pos1->col = anchor->col;
 			*(loc+i) = pos1;
-			char place = board[loc->row-i][loc->col];
-			printf("The character at (%d,%d) is %c \n",loc->row - i,loc->col,place);
+			char place = board[anchor->row-i][anchor->col];
+			printf("The character at (%d,%d) is %c \n",anchor->row - i,anchor->col,place);
 			fflush(stdout);
 			if(place != '~') {
 				return false;
@@ -185,18 +217,18 @@ bool Board::checkShip(Ship* ship, Location* loc, int dir) {
 	}
 	//right
 	else if(dir == 1) {
-		if(loc->col+size > 7) {
+		if(anchor->col+size > 7) {
 			puts("Direction led ship out of bounds");
 			fflush(stdout);
 			return false;
 		}
 		for(int i = 0; i < size; i++) {
-			Location pos1;
-			pos1.row = loc->row;
-			pos1.col = loc->col+i;
+			Location* pos1 = (Location*)malloc(sizeof(Location));
+			pos1->row = anchor->row;
+			pos1->col = anchor->col+i;
 			*(loc+i) = pos1;
-			char place = board[loc->row][loc->col + i];
-			printf("The character at (%d,%d) is %c \n",loc->row,loc->col + i,place);
+			char place = board[anchor->row][anchor->col + i];
+			printf("The character at (%d,%d) is %c \n",anchor->row,anchor->col + i,place);
 			fflush(stdout);
 			if(place != '~') {
 				return false;
@@ -205,18 +237,18 @@ bool Board::checkShip(Ship* ship, Location* loc, int dir) {
 	}
 	//straight down
 	else if(dir == 2) {
-		if(loc->row+size > 7) {
+		if(anchor->row+size > 7) {
 			puts("Direction led ship out of bounds");
 			fflush(stdout);
 			return false;
 		}
 		for(int i = 0; i < size; i++) {
-			Location pos1;
-			pos1.row = loc->row+i;
-			pos1.col = loc->col;
+			Location* pos1 = (Location*)malloc(sizeof(Location));
+			pos1->row = anchor->row+i;
+			pos1->col = anchor->col;
 			*(loc+i) = pos1;
-			char place = board[loc->row+i][loc->col];
-			printf("The character at (%d,%d) is %c \n",loc->row + i,loc->col,place);
+			char place = board[anchor->row+i][anchor->col];
+			printf("The character at (%d,%d) is %c \n",anchor->row + i,anchor->col,place);
 			fflush(stdout);
 			if(place != '~') {
 				return false;
@@ -225,26 +257,43 @@ bool Board::checkShip(Ship* ship, Location* loc, int dir) {
 	}
 	//left
 	else { // (dir ==3)
-		if(loc->col-size < 0) {
+		if(anchor->col-size < 0) {
 			puts("Direction led ship out of bounds");
 			fflush(stdout);
 			return false;
 		}
 		for(int i = 0; i < size; i++) {
-			Location pos1;
-			pos1.row = loc->row;
-			pos1.col = loc->col-i;
+			Location* pos1 = (Location*)malloc(sizeof(Location));
+			pos1->row = anchor->row;
+			pos1->col = anchor->col-i;
 			*(loc+i) = pos1;
-			char place = board[loc->row][loc->col - i];
-			printf("The character at (%d,%d) is %c \n",loc->row,loc->col - i,place);
+			char place = board[anchor->row][anchor->col - i];
+			printf("The character at (%d,%d) is %c \n",anchor->row,anchor->col - i,place);
 			fflush(stdout);
 			if(place != '~') {
 				return false;
 			}
 		}
 	}
+	puts("success!!");
+	fflush(stdout);
 	ship->updateShipLoc(loc);
 	return true;
+}
+
+void Board::placeAllShips() {
+	for(int i = 0; i < 5; i++) {
+		Ship* shippy = *(ships+i);
+		Location** shipLoc = shippy->getLocation();
+		int size = shippy->getSize();
+		char c = shippy->getName();
+		for(int j = 0; j < size; j++) {
+			Location* loccy = *(shipLoc+j);
+			board[loccy->row][loccy->col] = c;
+		}
+	}
+	puts("Success!");
+	fflush(stdout);
 }
 
 void Board::printMoveToFile(FILE* fp, Location* loc) {

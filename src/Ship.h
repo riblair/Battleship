@@ -22,12 +22,14 @@ public:
 	virtual ~Ship();
 	bool isSunk();
 	void updateHits(Location* loc);
-	void updateShipLoc(Location* pos);
+	void updateShipLoc(Location** pos);
 	int getSize();
+	Location** getLocation();
+	char getName();
 private:
 	int size;
 	char name;
-	Location* pos;
+	Location** pos; // (3,4),(3,5),(3,6)
 	bool* hits;
 };
 
