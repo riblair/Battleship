@@ -44,7 +44,8 @@ bool Ship::isSunk() {
 void Ship::updateHits(Location* loc) {
 	char* whichShip = "none";
 	for(int i = 0; i < size; i++){
-		if (loc->row == pos[i]->row || loc->col == pos[i]->col){
+		Location* tempLoc = *(pos+i);
+		if (loc->row == tempLoc->row && loc->col == tempLoc->col){
 			hits++;
 		}
 	}

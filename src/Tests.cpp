@@ -28,7 +28,10 @@ bool Tests::tests() {
 	bool ok4 = testCheckMove();
 	bool ok5 = testMakePlayerMove();
 	bool ok6 = testMakeRandomMove();
-	answer = ok1 && ok2 && ok3 && ok4 && ok5 && ok6;
+	bool ok7 = testUpdateHits();
+	bool ok8 = testIsSunk();
+
+	answer = ok1 && ok2 && ok3 && ok4 && ok5 && ok6 && ok7 && ok8;
 	return answer;
 }
 
@@ -255,14 +258,22 @@ bool Tests::testMakeRandomMove()
 	return ok;
 }
 
-/*bool Tests::testUpdateHits()
+bool Tests::testUpdateHits()
 {
 	bool ok = true;
-	Ship* testCruiser= new Ship('r', 2);
+	Ship* testCruiser= new Ship(2, 'r');
 
 	Location** shipLoc = (Location**)malloc(2*sizeof(Location*));
 	Location*  loc1= (Location*)malloc(sizeof(Location));
 	Location*  loc2= (Location*)malloc(sizeof(Location));
+
+	loc1->col = 1;
+	loc1->row = 1;
+	loc2->col = 1;
+	loc2->row = 2;
+	*(shipLoc) = loc1;
+	*(shipLoc+1) = loc2;
+
 
 	testCruiser->updateShipLoc(shipLoc);
 
@@ -275,6 +286,14 @@ bool Tests::testMakeRandomMove()
 	else
 		ok = false;
 
+	if(ok) {
+			puts("testUpdateHits Passed!");
+			fflush(stdout);
+		}
+		else {
+			puts("testUpdateHits1 FAILED!");
+			fflush(stdout);
+		}
 
 	return ok;
 }
@@ -285,4 +304,3 @@ bool Tests::testIsSunk()
 
 	return ok;
 }
-*/

@@ -26,10 +26,11 @@ public:
 	int getSize();
 	Location** getLocation();
 	char getName();
+	Location** pos; // (3,4),(3,5),(3,6)
 private:
 	int size;
 	char name;
-	Location** pos; // (3,4),(3,5),(3,6)
+
 	int hits;
 };
 
