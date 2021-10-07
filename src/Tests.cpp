@@ -25,7 +25,10 @@ bool Tests::tests() {
 	//bool ok2 = testmanuallyPlaceShips();
 	bool ok2 = true;
 	bool ok3 = testrandomlyPlaceShips();
-	answer = ok1 && ok2 && ok3;
+	bool ok4 = testCheckMove();
+	bool ok5 = testMakePlayerMove();
+	bool ok6 = testMakeRandomMove();
+	answer = ok1 && ok2 && ok3 && ok4 && ok5 && ok6;
 	return answer;
 }
 
@@ -146,13 +149,13 @@ bool Tests::testmanuallyPlaceShips() {
 	Board* board = new Board();
 	board->initBoard(true);
 	if(worked) {
-			puts("testmanuallyPlaceShips Passed!");
-			fflush(stdout);
-		}
-		else {
-			puts("testmanuallyPlaceShips FAILED!");
-			fflush(stdout);
-		}
+		puts("testmanuallyPlaceShips Passed!");
+		fflush(stdout);
+	}
+	else {
+		puts("testmanuallyPlaceShips FAILED!");
+		fflush(stdout);
+	}
 	//if the function doesnt crash we r good!
 	return worked;
 }
@@ -160,16 +163,100 @@ bool Tests::testmanuallyPlaceShips() {
 bool Tests::testrandomlyPlaceShips() {
 	bool worked = true;
 
-		Board* board = new Board();
-		board->initBoard(false);
-		if(worked) {
-				puts("testrandomlyPlaceShips Passed!");
-				fflush(stdout);
-			}
-			else {
-				puts("testrandomlyPlaceShips FAILED!");
-				fflush(stdout);
-			}
-		//if the function doesnt crash we r good!
-		return worked;
+	Board* board = new Board();
+	board->initBoard(false);
+	if(worked) {
+		puts("testrandomlyPlaceShips Passed!");
+		fflush(stdout);
+	}
+	else {
+		puts("testrandomlyPlaceShips FAILED!");
+		fflush(stdout);
+	}
+	//if the function doesnt crash we r good!
+	return worked;
 }
+
+bool Tests::testCheckMove()
+{
+	bool ok = true;
+	Board* board = new Board();
+	Location* loc = (Location*)malloc(sizeof(Location));
+	loc->col = 0;
+	loc->row = 0;
+	ok = ok || board->checkMove(loc);
+	loc->col = 100;
+	loc->row = 0;
+	ok = ok || !(board->checkMove(loc));
+	loc->col = 0;
+	loc->row = 100;
+	ok = ok || !(board->checkMove(loc));
+	ok = ok || board->checkMove(loc);
+	loc->col = -100;
+	loc->row = 0;
+	ok = ok || !(board->checkMove(loc));
+	loc->col = 0;
+	loc->row = -100;
+	ok = ok || !(board->checkMove(loc));
+	board->board[0][0] = 'a';
+	loc->col = 0;
+	loc->row = 0;
+	ok = ok || board->checkMove(loc);
+	board->board[0][0] = 'b';
+	ok = ok || board->checkMove(loc);
+	board->board[0][0] = 'd';
+	ok = ok || board->checkMove(loc);
+	board->board[0][0] = 's';
+	ok = ok || board->checkMove(loc);
+	board->board[0][0] = 'a';
+	ok = ok || board->checkMove(loc);
+	board->board[0][0] = 'r';
+	ok = ok || board->checkMove(loc);
+	board->board[0][0] = 'X';
+	ok = ok || !(board->checkMove(loc));
+	board->board[0][0] = 'M';
+	ok = ok || !(board->checkMove(loc));
+	if(ok) {
+		puts("testCheckMove Passed!");
+		fflush(stdout);
+	}
+	else {
+		puts("testCheckMove FAILED!");
+		fflush(stdout);
+	}
+	return ok;
+
+}
+
+bool Tests::testMakePlayerMove()
+{
+	bool ok = true;
+	Board* board = new Board();
+	board->makePlayerMove();
+	if(ok) {
+		puts("testMakePlayerMove Passed!");
+		fflush(stdout);
+	}
+	else {
+		puts("testMakePlayerMove FAILED!");
+		fflush(stdout);
+	}
+	return ok;
+}
+bool Tests::testMakeRandomMove()
+{
+	bool ok = true;
+	Board* board = new Board();
+	board->makeRandomMove();
+	if(ok) {
+		puts("testMakeRandomMove Passed!");
+		fflush(stdout);
+	}
+	else {
+		puts("testMakeRandomMove FAILED!");
+		fflush(stdout);
+	}
+	return ok;
+}
+
+
