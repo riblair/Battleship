@@ -27,13 +27,12 @@
 int main (int argc, char* argv[])
 {
 	Tests* tests = new Tests();
-	//if(tests->tests()) {
-	if(true) {
+	if(tests->tests()) {
 		Production* pP = new Production();
 		pP->prod(argc, argv);
 	}
 	else {
-		puts("shit failed");
+		puts("tests failed");
 	}
 return 1;
 

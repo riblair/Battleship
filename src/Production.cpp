@@ -21,8 +21,9 @@ bool Production::prod(int argc, char* argv[])
 {
 
 	welcomeScreen();
+	eraseLogFile();
 	int option  = -1;
-	int turnLimit = 100; //fix later
+	int turnLimit = -1;
 	Board* board1 = new Board();
 	Board* board2 = new Board();
 	board2->initBoard(false);
@@ -176,4 +177,10 @@ void Production::welcomeScreen (void) {
 	printf ("   of the opposing player's game board; [*] hit and [m] miss\n");
 	printf ("7. First player to guess the location of all ships wins\n\n");
 	fflush(stdout);
+}
+
+void Production::eraseLogFile() {
+	FILE* fp = fopen("battleship.log","w");
+	fprintf(fp,"Game has not Started yet");
+
 }
