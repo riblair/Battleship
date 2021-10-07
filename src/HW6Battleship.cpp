@@ -27,7 +27,8 @@
 int main (int argc, char* argv[])
 {
 	Tests* tests = new Tests();
-	if(tests->tests()) {
+	//if(tests->tests()) {
+	if(true) {
 		Production* pP = new Production();
 		pP->prod(argc, argv);
 	}

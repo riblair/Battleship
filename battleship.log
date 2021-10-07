@@ -1,0 +1,154 @@
+- - - - - - - - - - - 
+ 
+Move location was at (1,1) and was a HIT!
+~ d d d ~ ~ ~ ~ 
+~ X ~ a ~ ~ ~ ~ 
+~ b ~ a ~ ~ ~ ~ 
+~ b ~ a ~ ~ ~ ~ 
+~ b ~ a s s s ~ 
+~ ~ ~ a ~ ~ ~ ~ 
+~ ~ ~ ~ ~ ~ ~ ~ 
+~ ~ ~ ~ ~ r r ~ 
+
+- - - - - - - - - - - 
+ 
+Move location was at (1,4) and was a MISS!
+ 
+~ ~ b b b b ~ ~ 
+~ ~ ~ ~ M ~ ~ ~ 
+s r ~ ~ ~ ~ ~ ~ 
+s r ~ ~ ~ ~ ~ ~ 
+s ~ ~ ~ ~ ~ ~ ~ 
+~ ~ d d d ~ ~ ~ 
+~ ~ ~ a a a a a 
+~ ~ ~ ~ ~ ~ ~ ~ 
+
+- - - - - - - - - - - 
+ 
+Move location was at (2,2) and was a MISS!
+ 
+~ d d d ~ ~ ~ ~ 
+~ X ~ a ~ ~ ~ ~ 
+~ b M a ~ ~ ~ ~ 
+~ b ~ a ~ ~ ~ ~ 
+~ b ~ a s s s ~ 
+~ ~ ~ a ~ ~ ~ ~ 
+~ ~ ~ ~ ~ ~ ~ ~ 
+~ ~ ~ ~ ~ r r ~ 
+
+- - - - - - - - - - - 
+ 
+Move location was at (4,2) and was a MISS!
+ 
+~ ~ b b b b ~ ~ 
+~ ~ ~ ~ M ~ ~ ~ 
+s r ~ ~ ~ ~ ~ ~ 
+s r ~ ~ ~ ~ ~ ~ 
+s ~ M ~ ~ ~ ~ ~ 
+~ ~ d d d ~ ~ ~ 
+~ ~ ~ a a a a a 
+~ ~ ~ ~ ~ ~ ~ ~ 
+
+- - - - - - - - - - - 
+ 
+Move location was at (3,3) and was a HIT!
+~ d d d ~ ~ ~ ~ 
+~ X ~ a ~ ~ ~ ~ 
+~ b M a ~ ~ ~ ~ 
+~ b ~ X ~ ~ ~ ~ 
+~ b ~ a s s s ~ 
+~ ~ ~ a ~ ~ ~ ~ 
+~ ~ ~ ~ ~ ~ ~ ~ 
+~ ~ ~ ~ ~ r r ~ 
+
+- - - - - - - - - - - 
+ 
+Move location was at (6,0) and was a MISS!
+ 
+~ ~ b b b b ~ ~ 
+~ ~ ~ ~ M ~ ~ ~ 
+s r ~ ~ ~ ~ ~ ~ 
+s r ~ ~ ~ ~ ~ ~ 
+s ~ M ~ ~ ~ ~ ~ 
+~ ~ d d d ~ ~ ~ 
+M ~ ~ a a a a a 
+~ ~ ~ ~ ~ ~ ~ ~ 
+
+- - - - - - - - - - - 
+ 
+Move location was at (1,1) and was a HIT!
+ 
+~ d d d ~ ~ ~ ~ 
+~ X ~ a ~ ~ ~ ~ 
+~ b ~ a ~ ~ ~ ~ 
+~ b ~ a ~ ~ ~ ~ 
+~ b ~ a s s s ~ 
+~ ~ ~ a ~ ~ ~ ~ 
+~ ~ ~ ~ ~ ~ ~ ~ 
+~ ~ ~ ~ ~ r r ~ 
+
+- - - - - - - - - - - 
+ 
+Move location was at (1,4) and was a MISS!
+ 
+~ ~ b b b b ~ ~ 
+~ ~ ~ ~ M ~ ~ ~ 
+s r ~ ~ ~ ~ ~ ~ 
+s r ~ ~ ~ ~ ~ ~ 
+s ~ ~ ~ ~ ~ ~ ~ 
+~ ~ d d d ~ ~ ~ 
+~ ~ ~ a a a a a 
+~ ~ ~ ~ ~ ~ ~ ~ 
+
+- - - - - - - - - - - 
+ 
+Move location was at (3,3) and was a HIT!
+ 
+~ d d d ~ ~ ~ ~ 
+~ X ~ a ~ ~ ~ ~ 
+~ b ~ a ~ ~ ~ ~ 
+~ b ~ X ~ ~ ~ ~ 
+~ b ~ a s s s ~ 
+~ ~ ~ a ~ ~ ~ ~ 
+~ ~ ~ ~ ~ ~ ~ ~ 
+~ ~ ~ ~ ~ r r ~ 
+
+- - - - - - - - - - - 
+ 
+Move location was at (4,2) and was a MISS!
+ 
+~ ~ b b b b ~ ~ 
+~ ~ ~ ~ M ~ ~ ~ 
+s r ~ ~ ~ ~ ~ ~ 
+s r ~ ~ ~ ~ ~ ~ 
+s ~ M ~ ~ ~ ~ ~ 
+~ ~ d d d ~ ~ ~ 
+~ ~ ~ a a a a a 
+~ ~ ~ ~ ~ ~ ~ ~ 
+
+- - - - - - - - - - - 
+ 
+Move location was at (5,5) and was a MISS!
+ 
+~ d d d ~ ~ ~ ~ 
+~ X ~ a ~ ~ ~ ~ 
+~ b ~ a ~ ~ ~ ~ 
+~ b ~ X ~ ~ ~ ~ 
+~ b ~ a s s s ~ 
+~ ~ ~ a ~ M ~ ~ 
+~ ~ ~ ~ ~ ~ ~ ~ 
+~ ~ ~ ~ ~ r r ~ 
+
+- - - - - - - - - - - 
+ 
+Move location was at (6,0) and was a MISS!
+ 
+~ ~ b b b b ~ ~ 
+~ ~ ~ ~ M ~ ~ ~ 
+s r ~ ~ ~ ~ ~ ~ 
+s r ~ ~ ~ ~ ~ ~ 
+s ~ M ~ ~ ~ ~ ~ 
+~ ~ d d d ~ ~ ~ 
+M ~ ~ a a a a a 
+~ ~ ~ ~ ~ ~ ~ ~ 
+

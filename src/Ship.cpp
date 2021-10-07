@@ -34,9 +34,9 @@ bool Ship::isSunk() {
 
 	bool sunk = false;
 
-	if(hits == size){
-		sunk = true;
-	}
+//	if(hits == size){
+//		sunk = true;
+//	}
 
 	return sunk;
 

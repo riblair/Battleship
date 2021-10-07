@@ -2,7 +2,7 @@
  * Ship.h
  *
  *  Created on: Oct 4, 2021
- *      Author: black
+ *      Author: Riley Blair
  */
 
 #ifndef SHIP_H_
