@@ -30,7 +30,7 @@ private:
 	int size;
 	char name;
 	Location** pos; // (3,4),(3,5),(3,6)
-	bool* hits;
+	int hits;
 };
 
 #endif /* SHIP_H_ */

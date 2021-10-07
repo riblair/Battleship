@@ -259,4 +259,34 @@ bool Tests::testMakeRandomMove()
 	return ok;
 }
 
+/*bool Tests::testUpdateHits()
+{
+	bool ok = true;
+	Ship* testCruiser= new Ship('r', 2);
 
+	Location** shipLoc = (Location**)malloc(2*sizeof(Location*));
+	Location*  loc1= (Location*)malloc(sizeof(Location));
+	Location*  loc2= (Location*)malloc(sizeof(Location));
+
+	testCruiser->updateShipLoc(shipLoc);
+
+	testCruiser->updateHits(loc1);
+	testCruiser->updateHits(loc2);
+
+	if (testCruiser->isSunk()){
+		ok = true;
+	}
+	else
+		ok = false;
+
+
+	return ok;
+}
+
+bool Tests::testIsSunk()
+{
+	 bool ok = true;
+
+	return ok;
+}
+*/
