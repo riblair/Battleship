@@ -177,20 +177,20 @@ bool Board::checkShip(Ship* ship, Location** loc, int dir) {
 	int size = ship->getSize();
 	Location* anchor = *(loc);
 	if(dir < 0 || dir > 3) {
-		puts("Direction was entered invalidily");
-		fflush(stdout);
+//		puts("Direction was entered invalidily");
+//		fflush(stdout);
 		return false;
 	}
 	if(anchor->col > 7 || anchor->col < 0 || anchor->row > 7 || anchor->row < 0) {
-		puts("location suggested was out of bounds");
-		fflush(stdout);
+//		puts("location suggested was out of bounds");
+//		fflush(stdout);
 		return false;
 	}
 	//straight up
 	if(dir == 0) {
 		if(anchor->row-size < 0) {
-			puts("Direction led ship out of bounds");
-			fflush(stdout);
+//			puts("Direction led ship out of bounds");
+//			fflush(stdout);
 			return false;
 		}
 		for(int i = 0; i < size; i++) {

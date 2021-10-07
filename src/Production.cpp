@@ -43,12 +43,12 @@ bool Production::prod(int argc, char* argv[])
 			case 1:
 				if((strcmp(argv[i], "false") == 0)||(strcmp(argv[i], "False") == 0)){
 					option = 2;
-					printf("Your ships will be placed for you");
+					printf("Your ships will be placed for you\n");
 					fflush(stdout);
 				}
 				else if((strcmp(argv[i], "true") == 0)||(strcmp(argv[i], "True") == 0)){
 					option = 1;
-					printf("You will place your ships manually");
+					printf("You will place your ships manually\n");
 					fflush(stdout);
 				}
 				else{
@@ -65,7 +65,7 @@ bool Production::prod(int argc, char* argv[])
 				}
 				else
 				{
-					printf("No game will be conducted");
+					printf("No game will be conducted\n");
 					fflush(stdout);
 				}
 				break;
@@ -93,18 +93,17 @@ bool Production::prod(int argc, char* argv[])
 		playerTurn = true;
 	}
 	int curTurn = 1;
-	bool itHit = false;
 	while(!isWon(board1,board2) && curTurn < turnLimit) {
 
 		switch(playerTurn)
 		{
 		case true: //player's turn
-			puts("It's ur turn");
+			puts("\nIt's ur turn");
 			board2->makePlayerMove();
 			playerTurn = !playerTurn;
 			break;
 		case false:
-			puts("It's the AI's turn");
+			puts("\nIt's the AI's turn");
 			board1->makeRandomMove();
 			playerTurn = !playerTurn;
 			break;
@@ -158,11 +157,13 @@ bool Production::isWon(Board* board, Board* board2) {
 }
 
 void Production::welcomeScreen (void) {
+	printf ("\n---------------------------------------------------------------\n");
 	printf ("XXXXX   XXXX  XXXXXX XXXXXX XX     XXXXXX  XXXXX XX  XX XX XXXX\n");
 	printf ("XX  XX XX  XX   XX     XX   XX     XX     XX     XX  XX XX XX  XX\n");
 	printf ("XXXXX  XX  XX   XX     XX   XX     XXXX    XXXX  XXXXXX XX XXXX\n");
 	printf ("XX  XX XXXXXX   XX     XX   XX     XX         XX XX  XX XX XX\n");
 	printf ("XXXXX  XX  XX   XX     XX   XXXXXX XXXXXX XXXXX  XX  XX XX XX\n");
+	printf ("\n---------------------------------------------------------------");
 	printf ("\n\n");
 	printf ("RULES OF THE GAME:\n");
 	printf ("1. This is a two player game.\n");
