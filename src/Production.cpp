@@ -21,19 +21,61 @@ bool Production::prod(int argc, char* argv[])
 {
 
 	welcomeScreen();
-	int   option  = -1;
+	int option  = -1;
+	int turnLimit = 100; //fix later
 	Board* board1 = new Board();
 	Board* board2 = new Board();
 	board2->initBoard(false);
+	if(argc <=1) //no interesting information
+	{
+		puts("Didn't find any arguments.");
+		fflush(stdout);
+	}
+	else
+	{
+		printf("Found %d interesting arguments.\n", argc-1);
+		fflush(stdout);
+		for(int i = 1; i<argc; i++) //don't want to read argv[0]
+		{//argv[i] is a string
+			switch(i)
+			{
+			case 1:
+				if((strcmp(argv[i], "false") == 0)||(strcmp(argv[i], "False") == 0)){
+					option = 2;
+					printf("Your ships will be placed for you");
+					fflush(stdout);
+				}
+				else if((strcmp(argv[i], "true") == 0)||(strcmp(argv[i], "True") == 0)){
+					option = 1;
+					printf("You will place your ships manually");
+					fflush(stdout);
+				}
+				else{
+					puts("Unexpected argument.");
+					fflush(stdout);
+				}
+				break;
+			case 2:
+				turnLimit = atoi(argv[i]);
+				if(turnLimit < 0)
+				{
+					printf("The number of turns will be %d\n", turnLimit);
+					fflush(stdout);
+				}
+				else
+				{
+					printf("No game will be conducted");
+					fflush(stdout);
+				}
+				break;
+			default:
+				puts("Unexpected argument count.");
+				fflush(stdout);
+				break;
 
-	printf ("> Please select from the following menu:\n");
-	fflush(stdout);
-	printf ("> [1] Manually\n");
-	printf ("> [2] Randomly\n");
-	printf ("> Enter Option: ");
-	fflush(stdout);
-	scanf ("%d", &option);
-	fflush(stdin);
+			}
+		}
+	}
 
 	switch (option) {
 	case 1:
@@ -49,24 +91,23 @@ bool Production::prod(int argc, char* argv[])
 	if(turnOrder == 0) {
 		playerTurn = true;
 	}
-	int turnLimit = 100; //fix later
 	int curTurn = 1;
 	bool itHit = false;
 	while(!isWon(board1,board2) && curTurn < turnLimit) {
 
-			switch(playerTurn)
-			{
-			case true: //player's turn
-				puts("It's ur turn");
-				board2->makePlayerMove();
-				playerTurn = !playerTurn;
-				break;
-			case false:
-				puts("It's the AI's turn");
-				board1->makeRandomMove();
-				playerTurn = !playerTurn;
-				break;
-			}
+		switch(playerTurn)
+		{
+		case true: //player's turn
+			puts("It's ur turn");
+			board2->makePlayerMove();
+			playerTurn = !playerTurn;
+			break;
+		case false:
+			puts("It's the AI's turn");
+			board1->makeRandomMove();
+			playerTurn = !playerTurn;
+			break;
+		}
 	}
 
 	//while(currrent turn < turnLimit && !game Won)
