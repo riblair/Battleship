@@ -33,10 +33,16 @@ Ship::~Ship() {
 bool Ship::isSunk() {
 
 	bool sunk = false;
+	int hitsNum = 0;
+	for(int i = 0; i < size; i++){
+		if(hits[i]){
+			hitsNum++;
+		}
+	}
 
-//	if(hits == size){
-//		sunk = true;
-//	}
+	if(hitsNum == size){
+		sunk = true;
+	}
 
 	return sunk;
 
