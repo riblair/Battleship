@@ -58,7 +58,7 @@ bool Production::prod(int argc, char* argv[])
 				break;
 			case 2:
 				turnLimit = atoi(argv[i]);
-				if(turnLimit < 0)
+				if(turnLimit > 0)
 				{
 					printf("The number of turns will be %d\n", turnLimit);
 					fflush(stdout);
