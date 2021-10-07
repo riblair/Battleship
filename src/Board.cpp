@@ -280,36 +280,7 @@ bool Board::checkShip(Ship* ship, Location** loc, int dir) {
 
 
 void Board::printMoveToFile(Location* loc) {
-	//always writing to the battleshop.log.txt file
 
-	char c = board[loc->row][loc->col];
-	bool isHit = false;
-	if(c == 'X') {
-		isHit = true;
-	}
-	FILE* fp = fopen("battleship.log", "a");
-	if(fp == NULL) {
-		puts("Error reading the filename");
-		return;
-	}
-	fprintf(fp, "- - - - - - - - - - - \n \n");
-	fprintf(fp, "Move location was at (%d,%d) and ",loc->row,loc->col);
-	if(isHit) {
-		fprintf(fp, "was a HIT!\n \n");
-	}
-	else {
-		fprintf(fp,"was a MISS!\n \n");
-	}
-
-
-	for(int i = 0; i < 8; i++) {
-		for(int j = 0; j < 8; j++) {
-			fprintf(fp, "%c ",board[i][j]);
-		}
-		fprintf(fp,"\n");
-	}
-	fprintf(fp,"\n");
-	fclose(fp);
 }
 
 void Board::printBoard(bool showShips) {
@@ -414,7 +385,7 @@ bool Board::checkMove(Location* loc)
 {
 
 	bool ok = false;
-	if(loc->col < 0 || loc->col > 8 || loc->row < 0 || loc->row > 8)
+	if(loc->col < 0 || loc->col > 7 || loc->row < 0 || loc->row > 7)
 	{
 		return ok;
 	}
