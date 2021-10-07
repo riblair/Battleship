@@ -23,8 +23,8 @@ public:
 	virtual ~Board();
 	void initBoard(bool manual);
 
-	void manuallyPlaceShips();
-	void randomlyPlaceShips();
+	bool manuallyPlaceShips();
+	bool randomlyPlaceShips();
 	bool checkShip(Ship* ship, Location** loc, int dir);
 
 	void makePlayerMove();

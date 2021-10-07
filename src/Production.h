@@ -21,6 +21,7 @@ public:
 private:
 	void welcomeScreen();
 	bool isWon(Board* board, Board* board2);
+	void eraseLogFile();
 };
 
 #endif /* PRODUCTION_H_ */

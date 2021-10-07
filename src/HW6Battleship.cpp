@@ -32,7 +32,7 @@ int main (int argc, char* argv[])
 		pP->prod(argc, argv);
 	}
 	else {
-		puts("shit failed");
+		puts("tests failed");
 	}
 return 1;
 
