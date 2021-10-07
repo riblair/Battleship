@@ -182,5 +182,5 @@ void Production::welcomeScreen (void) {
 void Production::eraseLogFile() {
 	FILE* fp = fopen("battleship.log","w");
 	fprintf(fp,"Game has not Started yet");
-
+	fclose(fp);
 }
