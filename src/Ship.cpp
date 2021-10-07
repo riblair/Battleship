@@ -21,10 +21,9 @@ Ship::Ship(int size, char name) {
 	bool hitsArray[size];
 	for(int i = 0; i < size; i++) {
 		positions[i] = (Location*)malloc(sizeof(Location));
-		*(hitsArray+i) = false;
 	}
 	pos = positions;
-	hits = hitsArray;
+	hits = 0;
 }
 
 Ship::~Ship() {
@@ -34,14 +33,7 @@ Ship::~Ship() {
 bool Ship::isSunk() {
 
 	bool sunk = false;
-	int hitsNum = 0;
-	for(int i = 0; i < size; i++){
-		if(hits[i]){
-			hitsNum++;
-		}
-	}
-
-	if(hitsNum == size){
+	if(hits == size){
 		sunk = true;
 	}
 
@@ -53,7 +45,7 @@ void Ship::updateHits(Location* loc) {
 	char* whichShip = "none";
 	for(int i = 0; i < size; i++){
 		if (loc->row == pos[i]->row || loc->col == pos[i]->col){
-			hits[i] = true;
+			hits++;
 		}
 	}
 	if(this->isSunk()){

@@ -21,6 +21,8 @@ private:
 	bool testCheckMove();
 	bool testMakePlayerMove();
 	bool testMakeRandomMove();
+//	bool testUpdateHits();
+//	bool testIsSunk();
 };
 
 #endif /* TESTS_H_ */
