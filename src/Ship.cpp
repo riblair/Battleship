@@ -50,15 +50,40 @@ bool Ship::isSunk() {
 }
 
 void Ship::updateHits(Location* loc) {
-
+	char* whichShip = "none";
 	for(int i = 0; i < size; i++){
 		if (loc->row == pos[i]->row || loc->col == pos[i]->col){
 			hits[i] = true;
 		}
 	}
 	if(this->isSunk()){
-		puts("Ship has been sunk!");
+
+
+		switch(name)
+			{
+			case 'a':
+				whichShip = "Carrier";
+				break;
+			case 'b':
+				whichShip = "Battleship";
+				break;
+			case 'd':
+				whichShip = "Destroyer";
+				break;
+			case 's':
+				whichShip = "Sub";
+				break;
+			case 'r':
+				whichShip = "Cruiser";
+				break;
+			default:
+				whichShip = "none";
+				break;
+
+			}
 	}
+	printf("%s has been sunk!\n", whichShip);
+	fflush(stdout);
 
 	return;
 }
