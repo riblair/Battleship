@@ -43,12 +43,12 @@ bool Production::prod(int argc, char* argv[])
 			case 1:
 				if((strcmp(argv[i], "false") == 0)||(strcmp(argv[i], "False") == 0)){
 					option = 2;
-					printf("Your ships will be placed for you");
+					printf("Your ships will be placed for you\n");
 					fflush(stdout);
 				}
 				else if((strcmp(argv[i], "true") == 0)||(strcmp(argv[i], "True") == 0)){
 					option = 1;
-					printf("You will place your ships manually");
+					printf("You will place your ships manually\n");
 					fflush(stdout);
 				}
 				else{
@@ -65,7 +65,7 @@ bool Production::prod(int argc, char* argv[])
 				}
 				else
 				{
-					printf("No game will be conducted");
+					printf("No game will be conducted\n");
 					fflush(stdout);
 				}
 				break;
@@ -93,7 +93,6 @@ bool Production::prod(int argc, char* argv[])
 		playerTurn = true;
 	}
 	int curTurn = 1;
-	bool itHit = false;
 	while(!isWon(board1,board2) && curTurn < turnLimit) {
 
 		switch(playerTurn)
