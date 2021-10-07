@@ -7,6 +7,7 @@
 
 #include "Ship.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 Ship::Ship() {
 
@@ -54,6 +55,9 @@ void Ship::updateHits(Location* loc) {
 		if (loc->row == pos[i]->row || loc->col == pos[i]->col){
 			hits[i] = true;
 		}
+	}
+	if(this->isSunk()){
+		puts("Ship has been sunk!");
 	}
 
 	return;
