@@ -388,7 +388,7 @@ bool Board::checkMove(Location* loc)
 {
 
 	bool ok = false;
-	if(loc->col < 0 || loc->col > 8 || loc->row < 0 || loc->row > 8)
+	if(loc->col < 0 || loc->col > 7 || loc->row < 0 || loc->row > 7)
 	{
 		return ok;
 	}
