@@ -11,12 +11,16 @@
 #include <stdbool.h>
 #include <string.h>//strncpy
 #include <stdlib.h>//strtol
+#include "Board.h"
 
 class Production {
 public:
 	Production();
 	virtual ~Production();
 	bool prod(int argc, char* argv[]);
+private:
+	void welcomeScreen();
+	bool isWon(Board* board, Board* board2);
 };
 
 #endif /* PRODUCTION_H_ */

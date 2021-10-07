@@ -26,14 +26,15 @@ public:
 	void manuallyPlaceShips();
 	void randomlyPlaceShips();
 	bool checkShip(Ship* ship, Location** loc, int dir);
-	void placeAllShips();
 
 	void makePlayerMove();
 	bool checkMove(Location* loc);
 	void makeRandomMove();
 
-	void printMoveToFile(FILE* fp, Location* loc);
+	void printMoveToFile(Location* loc);
 	void printBoard(bool showShips);
+
+	int hits;
 private:
 	char board[8][8];
 	Ship* battle;
@@ -42,7 +43,7 @@ private:
 	Ship* cruise;
 	Ship* sub;
 	Ship* ships[5];
-	int hits;
+
 };
 
 #endif /* BOARD_H_ */

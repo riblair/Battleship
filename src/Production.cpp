@@ -19,33 +19,120 @@ Production::Production() {
 
 bool Production::prod(int argc, char* argv[])
 {
+
+	welcomeScreen();
 	int   option  = -1;
 	Board* board1 = new Board();
 	Board* board2 = new Board();
 	board2->initBoard(false);
 
 	printf ("> Please select from the following menu:\n");
-		fflush(stdout);
-		printf ("> [1] Manually\n");
-		printf ("> [2] Randomly\n");
-		printf ("> Enter Option: ");
-		fflush(stdout);
-		scanf ("%d", &option);
-		fflush(stdin);
+	fflush(stdout);
+	printf ("> [1] Manually\n");
+	printf ("> [2] Randomly\n");
+	printf ("> Enter Option: ");
+	fflush(stdout);
+	scanf ("%d", &option);
+	fflush(stdin);
+
+	switch (option) {
+	case 1:
+		board1->initBoard(true);
+		break;
+	case 2:
+		board1->initBoard(false);
+		break;
+	}
+	//0 = player first, 1 = AI first
+	int turnOrder = rand() % 2;
+	bool playerTurn = false;
+	if(turnOrder == 0) {
+		playerTurn = true;
+	}
+	int turnLimit = 100; //fix later
+	int curTurn = 1;
+	bool itHit = false;
+	while(!isWon(board1,board2) && curTurn < turnLimit) {
+
+			switch(playerTurn)
+			{
+			case true: //player's turn
+				puts("It's ur turn");
+				board2->makePlayerMove();
+				playerTurn = !playerTurn;
+				break;
+			case false:
+				puts("It's the AI's turn");
+				board1->makeRandomMove();
+				playerTurn = !playerTurn;
+				break;
+			}
+	}
+
+	//while(currrent turn < turnLimit && !game Won)
+	//take first players turn (assuming its player)
+	//ask player for a legal Move
+	//make legal move
+	//check hit
+	//print result of move (to consoloe and file)
+	//check for win
+	//take seconds players turn (assuming its AI)
+	//make random move
+	//check hit
+	//print result of move (to consoloe and file)
+	//check for win
+
+	/*
+	 * The program must record the chosen move, whether it was a hit, a miss,
+	 * or a redundant shot, and successive sea and fleet configurations for each
+	 * turn in a log file. You can choose the file format, but you must document
+	 * that, and adhere to what you describe
+	 */
 
 
-		switch (option) {
-			case 1:
-				board1->initBoard(true);
-		            break;
-			case 2:
-				board1->initBoard(false);
-					break;
-		}
-		return false;
+	return true;
 }
+
+
 
 Production::~Production() {
 	// TODO Auto-generated destructor stub
 }
 
+bool Production::isWon(Board* board, Board* board2) {
+	if(board->hits == 17) {
+		puts("PLAYER 2 WINS!");
+		fflush(stdout);
+		return true;
+	}
+	else if(board2->hits == 17) {
+		puts("PLAYER 1 WINS!");
+		fflush(stdout);
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void Production::welcomeScreen (void) {
+	printf ("XXXXX   XXXX  XXXXXX XXXXXX XX     XXXXXX  XXXXX XX  XX XX XXXX\n");
+	printf ("XX  XX XX  XX   XX     XX   XX     XX     XX     XX  XX XX XX  XX\n");
+	printf ("XXXXX  XX  XX   XX     XX   XX     XXXX    XXXX  XXXXXX XX XXXX\n");
+	printf ("XX  XX XXXXXX   XX     XX   XX     XX         XX XX  XX XX XX\n");
+	printf ("XXXXX  XX  XX   XX     XX   XXXXXX XXXXXX XXXXX  XX  XX XX XX\n");
+	printf ("\n\n");
+	printf ("RULES OF THE GAME:\n");
+	printf ("1. This is a two player game.\n");
+	printf ("2. Player 1 is you and Player 2 is the computer.\n");
+	printf ("3. Player 1 will be prompted if user wants to manually input coordinates\n");
+	printf ("   for the game board or have the computer randomly generate a game board\n");
+	printf ("4. There are five types of ships to be placed by longest length to the\n");
+	printf ("   shortest; [c] Carrier has 5 cells, [b] Battleship has 4 cells, [r] Cruiser\n");
+	printf ("   has 3 cells, [s] Submarine has 3 cells, [d] Destroyer has 2 cells\n");
+	printf ("5. The computer randomly selects which player goes first\n");
+	printf ("6. The game begins as each player tries to guess the location of the ships\n");
+	printf ("   of the opposing player's game board; [*] hit and [m] miss\n");
+	printf ("7. First player to guess the location of all ships wins\n\n");
+	fflush(stdout);
+}

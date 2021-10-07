@@ -16,6 +16,9 @@ public:
 	bool tests();
 private:
 	bool test1();
+	bool testCheckShip();
+	bool testmanuallyPlaceShips();
+	bool testrandomlyPlaceShips();
 };
 
 #endif /* TESTS_H_ */

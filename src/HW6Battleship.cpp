@@ -19,14 +19,22 @@
 
 #include "battleship.h"
 #include "Production.h"
+#include "Tests.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <fstream>
 
 int main (int argc, char* argv[])
 {
-	Production* pP = new Production();
-	pP->prod(argc, argv);
+	Tests* tests = new Tests();
+	if(tests->tests()) {
+		Production* pP = new Production();
+		pP->prod(argc, argv);
+	}
+	else {
+		puts("shit failed");
+	}
+return 1;
 
 	/**
 	 * Two boards exist within the game. Hint: each board should be

@@ -6,6 +6,8 @@
  */
 
 #include "Tests.h"
+#include "Board.h"
+#include "Ship.h"
 
 Tests::Tests() {
 	// TODO Auto-generated constructor stub
@@ -19,12 +21,155 @@ Tests::~Tests() {
 bool Tests::tests() {
 	bool answer = true;
 
-	bool ok1 = test1();
-
-	answer = ok1;
+	bool ok1 = testCheckShip();
+	//bool ok2 = testmanuallyPlaceShips();
+	bool ok2 = true;
+	bool ok3 = testrandomlyPlaceShips();
+	answer = ok1 && ok2 && ok3;
 	return answer;
 }
 
 bool Tests::test1() {
 	return true;
+}
+
+bool Tests::testCheckShip() {
+
+	bool placed = false;
+	Board* board = new Board();
+	Ship* shippy = new Ship(5,'a');
+	Location** shippyLoc = (Location**)malloc(5*sizeof(Location*));
+
+	Location* loc1 = (Location*)malloc(sizeof(Location));
+	Location* loc2 = (Location*)malloc(sizeof(Location));
+	Location* loc3 = (Location*)malloc(sizeof(Location));
+	Location* loc4 = (Location*)malloc(sizeof(Location));
+	Location* loc5 = (Location*)malloc(sizeof(Location));
+	Location* loc6 = (Location*)malloc(sizeof(Location));
+	Location* loc7 = (Location*)malloc(sizeof(Location));
+	Location* loc8 = (Location*)malloc(sizeof(Location));
+	Location* loc9 = (Location*)malloc(sizeof(Location));
+	Location* loc10 = (Location*)malloc(sizeof(Location));
+	Location* loc11 = (Location*)malloc(sizeof(Location));
+	Location* loc12 = (Location*)malloc(sizeof(Location));
+	Location* loc13 = (Location*)malloc(sizeof(Location));
+	Location* loc14 = (Location*)malloc(sizeof(Location));
+
+	//out of bounds errors
+	loc1->row = -1;
+	loc1->col = 4;
+	*(shippyLoc) = loc1;
+	placed = placed||board->checkShip(shippy,shippyLoc,0);
+
+	loc2->row = 4;
+	loc2->col = -1;
+	*(shippyLoc) = loc2;
+	placed = placed||board->checkShip(shippy,shippyLoc,0);
+
+	loc3->row = 8;
+	loc3->col = 2;
+	*(shippyLoc) = loc3;
+	placed = placed||board->checkShip(shippy,shippyLoc,0);
+
+	loc4->row = -1;
+	loc4->col = -1;
+	*(shippyLoc) = loc4;
+	placed = placed||board->checkShip(shippy,shippyLoc,0);
+
+	loc5->row = 2;
+	loc5->col = 8;
+	*(shippyLoc) = loc5;
+	placed = placed||board->checkShip(shippy,shippyLoc,0);
+
+	// testing the ship going out of bounds
+	loc6->row = 2;
+	loc6->col = 7;
+	*(shippyLoc) = loc6;
+	placed = placed||board->checkShip(shippy,shippyLoc,0);
+
+	loc7->row = 2;
+	loc7->col = 7;
+	*(shippyLoc) = loc7;
+	placed = placed||board->checkShip(shippy,shippyLoc,1);
+
+	loc8->row = 6;
+	loc8->col = 7;
+	*(shippyLoc) = loc8;
+	placed = placed||board->checkShip(shippy,shippyLoc,2);
+
+	loc9->row = 2;
+	loc9->col = 2;
+	*(shippyLoc) = loc9;
+	placed = placed||board->checkShip(shippy,shippyLoc,3);
+
+	//testing collisions with a properly placed ship
+	loc10->row = 3;
+	loc10->col = 1;
+	*(shippyLoc) = loc10;
+	placed = placed || !(board->checkShip(shippy, shippyLoc, 1));
+
+	loc11->row = 5;
+	loc11->col = 4;
+	*(shippyLoc) = loc11;
+	placed = placed || board->checkShip(shippy, shippyLoc, 0);
+
+	loc12->row = 3;
+	loc12->col = 0;
+	*(shippyLoc) = loc12;
+	placed = placed || board->checkShip(shippy, shippyLoc, 1);
+
+	loc13->row = 2;
+	loc13->col = 5;
+	*(shippyLoc) = loc13;
+	placed = placed || board->checkShip(shippy, shippyLoc, 2);
+
+	loc14->row = 3;
+	loc14->col = 7;
+	*(shippyLoc) = loc14;
+	placed = placed || board->checkShip(shippy, shippyLoc, 3);
+
+	if(!placed) {
+		puts("testCheckShip Passed!");
+		fflush(stdout);
+	}
+	else {
+		puts("testCheckShip FAILED!");
+		fflush(stdout);
+	}
+	return !placed;
+
+}
+
+bool Tests::testmanuallyPlaceShips() {
+	bool worked = true;
+
+	Board* board = new Board();
+	board->initBoard(true);
+	if(worked) {
+			puts("testmanuallyPlaceShips Passed!");
+			fflush(stdout);
+		}
+		else {
+			puts("testmanuallyPlaceShips FAILED!");
+			fflush(stdout);
+		}
+	//if the function doesnt crash we r good!
+	return worked;
+}
+
+bool Tests::testrandomlyPlaceShips() {
+	bool worked = true;
+
+		Board* board = new Board();
+		board->initBoard(false);
+		if(worked) {
+				puts("testrandomlyPlaceShips Passed!");
+				fflush(stdout);
+			}
+			else {
+				puts("testrandomlyPlaceShips FAILED!");
+				fflush(stdout);
+			}
+		//if the function doesnt crash we r good!
+		return worked;
 }

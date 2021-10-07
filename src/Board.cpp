@@ -32,15 +32,14 @@ Board::Board() {
 	*(ships+2) = destroy;
 	*(ships+3) = sub;
 	*(ships+4) = cruise;
-
-}
-
-void Board::initBoard(bool manual) {
 	for(int i = 0; i < 8; i++) {
 		for(int j = 0; j < 8; j++) {
 			board[i][j]= '~';
 		}
 	}
+}
+
+void Board::initBoard(bool manual) {
 	if(manual) {
 		manuallyPlaceShips();
 	}
@@ -91,8 +90,6 @@ void Board::manuallyPlaceShips() {
 			fflush(stdout);
 			break;
 		}
-		puts("boop");
-		fflush(stdout);
 		Ship* shippy = *(ships+i);
 		int size = shippy->getSize();
 		Location** locations = (Location**)malloc(size*sizeof(Location*));
@@ -127,7 +124,6 @@ void Board::manuallyPlaceShips() {
 			}
 		} while(!correct);
 	}
-	placeAllShips();
 }
 
 void Board::randomlyPlaceShips() {
@@ -136,15 +132,14 @@ void Board::randomlyPlaceShips() {
 		Ship* shippy = *(ships+i);
 		int size = shippy->getSize();
 		Location** locations = (Location**)malloc(size*sizeof(Location*));
-		Location* shipLoc = (Location*)malloc(sizeof(Location));
-		*(locations) = shipLoc;
-		shipLoc->row = -1;
-		shipLoc->col = -1;
+		//Location* shipLoc = (Location*)malloc(sizeof(Location));
 		int row = -1;
 		int col = -1;
 		int dir = -1;
 		bool correct = false;
 		do {
+			Location* shipLoc = (Location*)malloc(sizeof(Location));
+			*(locations) = shipLoc;
 			printf("trying to put ship # %d on the board \n", i);
 			fflush(stdout);
 			row = rand() % 8;
@@ -152,6 +147,7 @@ void Board::randomlyPlaceShips() {
 			dir = rand() % 4;
 			shipLoc->row = row;
 			shipLoc->col = col;
+			*(locations) = shipLoc;
 			printf("ship is trying to be placed at (%d,%d) with direction %d \n",row,col,dir);
 			fflush(stdout);
 			if(checkShip(*(ships+i), locations, dir)) {
@@ -165,7 +161,6 @@ void Board::randomlyPlaceShips() {
 		puts("yay!");
 		fflush(stdout);
 	}
-	placeAllShips();
 	//	care = new Ship();
 	//	Location* cl[5];
 	//	Location* newLoc;
@@ -185,8 +180,8 @@ void Board::randomlyPlaceShips() {
 bool Board::checkShip(Ship* ship, Location** loc, int dir) {
 	int size = ship->getSize();
 	Location* anchor = *(loc);
-	if(dir < 0) {
-		puts("Either dir was null, or dir was less than 0");
+	if(dir < 0 || dir > 3) {
+		puts("Direction was entered invalidily");
 		fflush(stdout);
 		return false;
 	}
@@ -278,46 +273,55 @@ bool Board::checkShip(Ship* ship, Location** loc, int dir) {
 	puts("success!!");
 	fflush(stdout);
 	ship->updateShipLoc(loc);
+	char c = ship->getName();
+	for(int i = 0; i < size; i++) {
+		Location* curPos = *(loc+i);
+		board[curPos->row][curPos->col] = c;
+	}
+	printBoard(true);
 	return true;
 }
 
-void Board::placeAllShips() {
-	for(int i = 0; i < 5; i++) {
-		Ship* shippy = *(ships+i);
-		Location** shipLoc = shippy->getLocation();
-		int size = shippy->getSize();
-		char c = shippy->getName();
-		for(int j = 0; j < size; j++) {
-			Location* loccy = *(shipLoc+j);
-			board[loccy->row][loccy->col] = c;
-		}
-	}
-	puts("Success!");
-	fflush(stdout);
-}
 
-void Board::printMoveToFile(FILE* fp, Location* loc) {
+void Board::printMoveToFile(Location* loc) {
 
 }
 
 void Board::printBoard(bool showShips) {
-
+	for(int i = 0; i < 8; i++) {
+		for(int j = 0; j < 8; j++) {
+			if(showShips) {
+				printf("%c ",board[i][j]);
+			}
+			else {
+				if(board[i][j] == 'M' || board[i][j] == 'X') {
+					printf("%c ",board[i][j]);
+				}
+				else {
+					printf("~ ");
+				}
+			}
+			fflush(stdout);
+		}
+		puts("");
+		fflush(stdout);
+	}
 }
 
 Board::~Board() {
 	// TODO Auto-generated destructor stub
 }
-
+//returns true if its a hit
 void Board::makePlayerMove()
 {
 	bool okMove = false;
 	int row = -1;
 	int col = -1;
-	Location* loc = new Location();
+	Location* loc = (Location*)malloc(sizeof(Location));
+	this->printBoard(false);
 
 	while(!okMove)
 	{
-		this->printBoard(false);
 		puts("Enter a row number for hit (0-7)");
 		fflush(stdout);
 		scanf("%d",&row);
@@ -340,30 +344,35 @@ void Board::makePlayerMove()
 		fflush(stdout);
 		care->updateHits(loc);
 		board[row][col] = 'X';
+		hits++;
 		break;
 	case 'b':
 		puts("Hit!");
 		fflush(stdout);
 		battle->updateHits(loc);
 		board[row][col] = 'X';
+		hits++;
 		break;
 	case 'd':
 		puts("Hit!");
 		fflush(stdout);
 		destroy->updateHits(loc);
 		board[row][col] = 'X';
+		hits++;
 		break;
 	case 's':
 		puts("Hit!");
 		fflush(stdout);
 		sub->updateHits(loc);
 		board[row][col] = 'X';
+		hits++;
 		break;
 	case 'r':
 		puts("Hit!");
 		fflush(stdout);
 		cruise->updateHits(loc);
 		board[row][col] = 'X';
+		hits++;
 		break;
 	default:
 		puts("Miss!");
@@ -371,6 +380,7 @@ void Board::makePlayerMove()
 		board[row][col] = 'M';
 		break;
 	}
+	printMoveToFile(loc);
 	this->printBoard(false);
 }
 
@@ -401,12 +411,12 @@ bool Board::checkMove(Location* loc)
 
 void Board::makeRandomMove()
 {
-
 	bool okMove = false;
 	int row = rand() % 8;
 	int col = rand() % 8;
-	Location* loc = new Location();
-	this->printBoard(false);
+	Location* loc = (Location*)malloc(sizeof(Location));
+	//unsure if we need line 422
+	//this->printBoard(true);
 	puts("Taking Random Move...");
 	fflush(stdout);
 	while(!okMove)
@@ -424,30 +434,35 @@ void Board::makeRandomMove()
 		fflush(stdout);
 		care->updateHits(loc);
 		board[row][col] = 'X';
+		hits++;
 		break;
 	case 'b':
 		puts("Hit!");
 		fflush(stdout);
 		battle->updateHits(loc);
 		board[row][col] = 'X';
+		hits++;
 		break;
 	case 'd':
 		puts("Hit!");
 		fflush(stdout);
 		destroy->updateHits(loc);
 		board[row][col] = 'X';
+		hits++;
 		break;
 	case 's':
 		puts("Hit!");
 		fflush(stdout);
 		sub->updateHits(loc);
 		board[row][col] = 'X';
+		hits++;
 		break;
 	case 'r':
 		puts("Hit!");
 		fflush(stdout);
 		cruise->updateHits(loc);
 		board[row][col] = 'X';
+		hits++;
 		break;
 	default:
 		puts("Miss!");
@@ -455,5 +470,6 @@ void Board::makeRandomMove()
 		board[row][col] = 'M';
 		break;
 	}
-	this->printBoard(false);
+	printMoveToFile(loc);
+	this->printBoard(true);
 }
