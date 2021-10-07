@@ -19,6 +19,9 @@ private:
 	bool testCheckShip();
 	bool testmanuallyPlaceShips();
 	bool testrandomlyPlaceShips();
+	bool testCheckMove();
+	bool testMakePlayerMove();
+	bool testMakeRandomMove();
 };
 
 #endif /* TESTS_H_ */

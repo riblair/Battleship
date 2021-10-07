@@ -35,8 +35,9 @@ public:
 	void printBoard(bool showShips);
 
 	int hits;
-private:
 	char board[8][8];
+private:
+
 	Ship* battle;
 	Ship* destroy;
 	Ship* care;
