@@ -22,8 +22,8 @@ bool Tests::tests() {
 	bool answer = true;
 
 	bool ok1 = testCheckShip();
-	//bool ok2 = testmanuallyPlaceShips();
-	bool ok2 = true;
+	bool ok2 = testmanuallyPlaceShips();
+	//bool ok2 = true;
 	bool ok3 = testrandomlyPlaceShips();
 	bool ok4 = testCheckMove();
 	bool ok5 = testMakePlayerMove();
@@ -32,9 +32,6 @@ bool Tests::tests() {
 	return answer;
 }
 
-bool Tests::test1() {
-	return true;
-}
 
 bool Tests::testCheckShip() {
 
@@ -147,7 +144,7 @@ bool Tests::testmanuallyPlaceShips() {
 	bool worked = true;
 
 	Board* board = new Board();
-	board->initBoard(true);
+	worked = board->manuallyPlaceShips();
 	if(worked) {
 		puts("testmanuallyPlaceShips Passed!");
 		fflush(stdout);
@@ -164,7 +161,7 @@ bool Tests::testrandomlyPlaceShips() {
 	bool worked = true;
 
 	Board* board = new Board();
-	board->initBoard(false);
+	worked = board->randomlyPlaceShips();
 	if(worked) {
 		puts("testrandomlyPlaceShips Passed!");
 		fflush(stdout);
@@ -184,38 +181,37 @@ bool Tests::testCheckMove()
 	Location* loc = (Location*)malloc(sizeof(Location));
 	loc->col = 0;
 	loc->row = 0;
-	ok = ok || board->checkMove(loc);
+	ok = ok && board->checkMove(loc);
 	loc->col = 100;
 	loc->row = 0;
-	ok = ok || !(board->checkMove(loc));
+	ok = ok && !(board->checkMove(loc));
 	loc->col = 0;
 	loc->row = 100;
-	ok = ok || !(board->checkMove(loc));
-	ok = ok || board->checkMove(loc);
+	ok = ok && !(board->checkMove(loc));
 	loc->col = -100;
 	loc->row = 0;
-	ok = ok || !(board->checkMove(loc));
+	ok = ok && !(board->checkMove(loc));
 	loc->col = 0;
 	loc->row = -100;
-	ok = ok || !(board->checkMove(loc));
+	ok = ok && !(board->checkMove(loc));
 	board->board[0][0] = 'a';
 	loc->col = 0;
 	loc->row = 0;
-	ok = ok || board->checkMove(loc);
+	ok = ok && board->checkMove(loc);
 	board->board[0][0] = 'b';
-	ok = ok || board->checkMove(loc);
+	ok = ok && board->checkMove(loc);
 	board->board[0][0] = 'd';
-	ok = ok || board->checkMove(loc);
+	ok = ok && board->checkMove(loc);
 	board->board[0][0] = 's';
-	ok = ok || board->checkMove(loc);
+	ok = ok && board->checkMove(loc);
 	board->board[0][0] = 'a';
-	ok = ok || board->checkMove(loc);
+	ok = ok && board->checkMove(loc);
 	board->board[0][0] = 'r';
-	ok = ok || board->checkMove(loc);
+	ok = ok && board->checkMove(loc);
 	board->board[0][0] = 'X';
-	ok = ok || !(board->checkMove(loc));
+	ok = ok && !(board->checkMove(loc));
 	board->board[0][0] = 'M';
-	ok = ok || !(board->checkMove(loc));
+	ok = ok && !(board->checkMove(loc));
 	if(ok) {
 		puts("testCheckMove Passed!");
 		fflush(stdout);

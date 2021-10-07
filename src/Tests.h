@@ -15,7 +15,6 @@ public:
 	virtual ~Tests();
 	bool tests();
 private:
-	bool test1();
 	bool testCheckShip();
 	bool testmanuallyPlaceShips();
 	bool testrandomlyPlaceShips();
