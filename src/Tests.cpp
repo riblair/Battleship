@@ -261,6 +261,7 @@ bool Tests::testMakeRandomMove()
 bool Tests::testUpdateHits()
 {
 	bool ok = true;
+
 	Ship* testCruiser= new Ship(2, 'r');
 
 	Location** shipLoc = (Location**)malloc(2*sizeof(Location*));
@@ -289,11 +290,11 @@ bool Tests::testUpdateHits()
 	if(ok) {
 			puts("testUpdateHits Passed!");
 			fflush(stdout);
-		}
-		else {
-			puts("testUpdateHits1 FAILED!");
-			fflush(stdout);
-		}
+	}
+	else {
+		puts("testUpdateHits1 FAILED!");
+		fflush(stdout);
+	}
 
 	return ok;
 }
@@ -302,5 +303,37 @@ bool Tests::testIsSunk()
 {
 	 bool ok = true;
 
-	return ok;
+	 Ship* testCruiser2= new Ship(2, 'r');
+
+	 	Location** shipLoc = (Location**)malloc(2*sizeof(Location*));
+	 	Location*  loc1= (Location*)malloc(sizeof(Location));
+	 	Location*  loc2= (Location*)malloc(sizeof(Location));
+
+	 	loc1->col = 1;
+	 	loc1->row = 1;
+	 	loc2->col = 1;
+	 	loc2->row = 2;
+	 	*(shipLoc) = loc1;
+	 	*(shipLoc+1) = loc2;
+	 	testCruiser2->updateShipLoc(shipLoc);
+
+	 	testCruiser2->updateHits(loc1);
+	 	testCruiser2->updateHits(loc2);
+
+	 	if (testCruiser2->isSunk()){
+	 			ok = true;
+	 		}
+	 		else
+	 			ok = false;
+
+		if(ok) {
+				puts("testIsSunk Passed!");
+				fflush(stdout);
+			}
+			else {
+				puts("testIsSunk FAILED!");
+				fflush(stdout);
+			}
+
+		return ok;
 }
